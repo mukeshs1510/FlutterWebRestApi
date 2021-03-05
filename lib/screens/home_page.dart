@@ -21,10 +21,16 @@ class _HomePageState extends State<HomePage> {
   // a func. will handle the yes or no
   _handleGetAnswer() async {
     String que = _questionFieldController.text?.trim();
-    if (que == null || que.length == 0 || que[que.length - 1] != '?') {
+    if (que == null || que.length == 0) {
       _scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text("Please ask the valid question..."),
         duration: Duration(milliseconds: 3000),
+      ));
+      return;
+    } else if (que[que.length - 1] != '?') {
+      _scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text("Please add '?' at the last as its a QUESTION"),
+        duration: Duration(milliseconds: 5000),
       ));
       return;
     } else {
@@ -98,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.bottomRight,
                     child: Text(
                       _currentAnswer.answer.toUpperCase(),
-                      style: TextStyle(color: Colors.black, fontSize: 24),
+                      style: TextStyle(color: Colors.white, fontSize: 24),
                     ),
                   ),
                 ),
